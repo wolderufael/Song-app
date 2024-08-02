@@ -20,7 +20,7 @@ const Editsong = () => {
   const songToEdit = useSelector((state) =>
     state.songs.songs.find((song) => song._id === id)
   );
-  // const songState = useSelector((state) => state.songs.songs); 
+  // const songState = useSelector((state) => state.songs.songs);
   // console.log("titleedit"+songToEdit.title);
   // console.log(songState);
 
@@ -36,19 +36,8 @@ const Editsong = () => {
   const navigate = useNavigate();
   const [message, setMessage] = useState("");
 
-  // useEffect(() => {
-  //   if (songDetails) {
-  //     setFormData(songDetails);
-  //   }
-  // }, [songDetails]);
 
-  // const handleChange = (e) => {
-  //   const { name, value } = e.target;
-  //   setFormData({
-  //     ...formData,
-  //     [name]: value,
-  //   });
-  // };
+ 
 
   // async function editSongFunc() {
   //   try {
@@ -75,25 +64,12 @@ const Editsong = () => {
 
   const handleEdit = (e) => {
     e.preventDefault();
-    // const editedSong = { ...song, id };
-    // console.log(song);
-    // console.log("title : " + song.title);
-    // console.log("id : " + id);
-    dispatch(editSong({song,id}));
+    dispatch(editSong({ song, id }));
   };
 
   return (
     <div className="song-params">
-      <form
-        onSubmit={
-          handleEdit
-          // (e) => {
-          // e.preventDefault();
-          // editSongFunc();
-          // setShowModal(true);
-          // }
-        }
-      >
+      <form onSubmit={handleEdit}>
         <label htmlFor="title">
           <input
             name="title"
