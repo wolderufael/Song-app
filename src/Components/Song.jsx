@@ -4,24 +4,21 @@ import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { deleteSong } from "../Redux/songsSlice";
 import { setSongDetails } from "../Redux/songDetailsSlice";
-import { deleteSongApi } from "../Api/Api";
 import "./Song.css";
 
 const Song = ({ title, artist, album, genre, id }) => {
   const dispatch = useDispatch();
 
-  const handleEditClick = () => {
-    dispatch(setSongDetails({ title, artist, album, genre, id }));
+  const handleEdit = () => {
+    // dispatch(setSongDetails({ title, artist, album, genre, id }));
   };
-  async function handleDeleteClick() {
-    dispatch(setSongDetails({ title, artist, album, genre, id }));
+  const handleDelete = (id) => {
     try {
-      await deleteSongApi(id);
       dispatch(deleteSong(id));
     } catch (error) {
       console.log(error);
     }
-  }
+  };
 
   return (
     <div className="song">
@@ -40,12 +37,15 @@ const Song = ({ title, artist, album, genre, id }) => {
         </div>
       </Link>
       <div className="icons">
-        <Link to={`/editsong/${id}`} onClick={handleEditClick}>
+        <Link to={`/editsong/${id}`} onClick={handleEdit}>
           <button className="icon-btn edit-btn">
             <FontAwesomeIcon icon={faEdit} className="icon-song" alt="Edit" />
           </button>
         </Link>
-        <button onClick={handleDeleteClick} className="icon-btn delete-btn">
+        <button
+          onClick={() => handleDelete(id)}
+          className="icon-btn delete-btn"
+        >
           <FontAwesomeIcon icon={faTrashAlt} className="icon-song" />
         </button>
       </div>

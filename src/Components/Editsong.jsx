@@ -1,70 +1,105 @@
 import { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
 import { editSongApi } from "../Api/Api";
+import { editSong } from "../Redux/songsSlice";
 import Modal from "./Modal";
 
 const Editsong = () => {
-  const songDetails = useSelector((state) => state.songDetails);
-  const id = songDetails.id;
-  const [formData, setFormData] = useState({
-    title: "",
-    artist: "",
-    album: "",
-    genre: "",
+  // const songDetails = useSelector((state) => state.songDetails);
+  // const id = songDetails.id;
+
+  // const [formData, setFormData] = useState({
+  //   title: "",
+  //   artist: "",
+  //   album: "",
+  //   genre: "",
+  // });
+
+  const { id } = useParams();
+  const songToEdit = useSelector((state) =>
+    state.songs.songs.find((song) => song._id === id)
+  );
+  // const songState = useSelector((state) => state.songs.songs); 
+  // console.log("titleedit"+songToEdit.title);
+  // console.log(songState);
+
+  const [song, setSong] = useState({
+    title: songToEdit?.title || "",
+    artist: songToEdit?.artist || "",
+    album: songToEdit?.album || "",
+    genre: songToEdit?.genre || "",
   });
+  const dispatch = useDispatch();
+
   const [showModal, setShowModal] = useState(false);
   const navigate = useNavigate();
   const [message, setMessage] = useState("");
 
-  useEffect(() => {
-    if (songDetails) {
-      setFormData(songDetails);
-    }
-  }, [songDetails]);
+  // useEffect(() => {
+  //   if (songDetails) {
+  //     setFormData(songDetails);
+  //   }
+  // }, [songDetails]);
 
+  // const handleChange = (e) => {
+  //   const { name, value } = e.target;
+  //   setFormData({
+  //     ...formData,
+  //     [name]: value,
+  //   });
+  // };
+
+  // async function editSongFunc() {
+  //   try {
+  //     const res = await editSongApi(id,formData);
+  //     if (res.message === "Song edited successfully") {
+  //       setMessage("Song edited successfully");
+  //     } else if (res.message === "Song ID is required") {
+  //       setMessage("Song ID is required");
+  //     } else if (res.message === "At least one field is required to update") {
+  //       setMessage("At least one field is required to update");
+  //     } else if (res.message === "Song not found") {
+  //       setMessage("Song not found");
+  //     } else {
+  //       setMessage("An unexpected error occurred");
+  //     }
+  //   } catch (error) {
+  //     setMessage("Failed to edit song");
+  //   }
+  // }
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
+    setSong({ ...song, [name]: value });
   };
 
-  async function editSongFunc() {
-    try {
-      const res = await editSongApi(id,formData);
-      if (res.message === "Song edited successfully") {
-        setMessage("Song edited successfully");
-      } else if (res.message === "Song ID is required") {
-        setMessage("Song ID is required");
-      } else if (res.message === "At least one field is required to update") {
-        setMessage("At least one field is required to update");
-      } else if (res.message === "Song not found") {
-        setMessage("Song not found");
-      } else {
-        setMessage("An unexpected error occurred");
-      }
-    } catch (error) {
-      setMessage("Failed to edit song");
-    }
-  }
+  const handleEdit = (e) => {
+    e.preventDefault();
+    // const editedSong = { ...song, id };
+    // console.log(song);
+    // console.log("title : " + song.title);
+    // console.log("id : " + id);
+    dispatch(editSong({song,id}));
+  };
 
   return (
     <div className="song-params">
       <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          editSongFunc();
-          setShowModal(true);
-        }}
+        onSubmit={
+          handleEdit
+          // (e) => {
+          // e.preventDefault();
+          // editSongFunc();
+          // setShowModal(true);
+          // }
+        }
       >
         <label htmlFor="title">
           <input
             name="title"
             id="title"
             placeholder="Title"
-            value={formData.title}
+            value={song.title}
             onChange={handleChange}
             required
           />
@@ -74,7 +109,7 @@ const Editsong = () => {
             name="artist"
             id="artist"
             placeholder="Artist"
-            value={formData.artist}
+            value={song.artist}
             onChange={handleChange}
             required
           />
@@ -84,7 +119,7 @@ const Editsong = () => {
             name="album"
             id="album"
             placeholder="Album"
-            value={formData.album}
+            value={song.album}
             onChange={handleChange}
             required
           />
@@ -94,7 +129,7 @@ const Editsong = () => {
             name="genre"
             id="genre"
             placeholder="Genre"
-            value={formData.genre}
+            value={song.genre}
             onChange={handleChange}
             required
           />

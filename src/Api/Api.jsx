@@ -29,9 +29,9 @@ export const addSongApi = async function (formData) {
 }
 
 
-export const editSongApi = async function (id,formData) {
+export const editSongApi = async function (song,id) {
   try {
-    const response = await api.put(`/editsong/${id}`,formData);
+    const response = await api.put(`/editsong/${id}`,song);
     return response.data;
   }
   catch (error) {

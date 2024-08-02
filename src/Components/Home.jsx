@@ -2,23 +2,18 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Results from "./Results";
-import { fetchSongsApi } from "../Api/Api";
 import { fetchSongs } from "../Redux/songsSlice";
 
 const Home = () => {
   const dispatch = useDispatch();
-  const songs = useSelector((state) => state.songs);
+  const songs = useSelector((state) => state.songs.songs);
   const [filterType, setFilterType] = useState("artist");
   const [filterValue, setFilterValue] = useState("");
 
   useEffect(() => {
-    requestSongs();
-  }, []);
-
-  async function requestSongs() {
-    const res = await fetchSongsApi();
-    dispatch(fetchSongs(res.songs));
-  }
+    dispatch(fetchSongs());
+    console.log(songs);
+  }, [dispatch]);
 
   const filteredSongs = songs.filter((song) => {
     if (filterType === "artist") {
@@ -32,7 +27,7 @@ const Home = () => {
     }
     return true;
   });
-
+  console.log(filteredSongs);
   return (
     <div>
       <div className="filters">
