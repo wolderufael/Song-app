@@ -3,41 +3,55 @@
   color: #333;
 }
 
-.song-params {
+.search-params {
+    width: 1100px;
+    margin: 0 auto;
+  }
+
+/* .song-params {
   display: flex;
   align-items: center;
   justify-content: center;
   width: 50%;
   margin: auto;
-}
+} */
 
 /**************/
 
 /******************/
 
-.song-params form {
+.search-params form {
   border-radius: 6px;
   background: #333;
   box-shadow: 0px 0px 12px #aaa, -0px -0px 12px #fff;
   width: 360px;
-  /* margin: 0px 25px 0px 0px; */
+  margin: 0px 25px 0px 0px;
   padding: 35px 15px 15px 15px;
-  /* float: left; */
+  float: left;
+}
+.search {
+  border-radius: 6px;
+  background: #faeff0;
+  box-shadow: 0px 0px 12px #aaa, -0px -0px 12px #fff;
+  width: 715px;
+  padding: 15px;
+  float: left;
+  margin-bottom: 25px;
 }
 
-.song-params label {
+.search-params label {
   display: block;
   width: 100%;
 }
 
-.song-params input {
+.search-params form input {
   margin-bottom: 30px;
   font-size: 18px;
   height: 30px;
   width: 325px;
 }
 
-.song-params button,
+form button,
 #modal button,
 #modal a {
   background-color: #ad343e;
@@ -51,15 +65,15 @@
   cursor: pointer;
 }
 
-.song-params button:hover {
+form button:hover {
   background-color: #122622;
 }
 
-.song-params button:active {
+form button:active {
   background-color: #5f1d22;
 }
 
-.song-params button:focus {
+form button:focus {
   border: 1px solid cornflowerblue;
 }
 
@@ -158,15 +172,7 @@ header {
   justify-content: center;
   align-items: center;
 }
-.search {
-  border-radius: 6px;
-  background: #faeff0;
-  box-shadow: 0px 0px 12px #aaa, -0px -0px 12px #fff;
-  width: 80%;
-  padding: 15px;
-  float: left;
-  margin-bottom: 25px;
-}
+
 .artist-img {
   width: 100px;
   height: 100px;
@@ -299,43 +305,117 @@ header {
   margin-right: 15px;
 }
 
-@media only screen and (max-width: 1129px) {
-  header {
-    display: flex;
-    align-content: center;
+ @media only screen and (max-width: 1129px) {
+    header {
+      display: flex;
+      align-content: center;
+      justify-content: center;
+      width: 95%;
+      margin: 0 auto;
+      padding: 20px 0px 0px 0px;
+    }
+  
+    .search-params {
+      width: 95%;
+    }
+  
+    .search-params form {
+      margin-bottom: 20px;
+    }
+  
+    .search {
+      width: 55%;
+      padding: 15px;
+      border-radius: 9px;
+      float: left;
+      margin-bottom: 25px;
+    }
+  
+    .details {
+      width: 95%;
+      margin: 0 auto;
+      padding: 15px;
+      border-radius: 9px;
+      margin-bottom: 25px;
+    }
+  
+    .info {
+      width: 65%;
+    }
+  
+    .info h1 {
+      width: 100%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  
+    .info h2 {
+      width: 100%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+  
+  @media only screen and (max-width: 945px) {
+    .search-params {
+      width: 95%;
+    }
+  
+    .search {
+      width: 100%;
+    }
+  }
+  
+  @media only screen and (max-width: 600px) {
+    .pet {
+      height: 200px;
+    }
+  
+    .info {
+      width: 100%;
+      text-align: center;
+    }
+  
+    .image-container {
+      margin: 0 auto;
+      float: none;
+    }
+    .carousel-smaller > img {
+      width: 60px;
+      height: 60px;
+    }
+  }
+  
+  .loading-pane {
+    align-items: center;
     justify-content: center;
-    /* width: 95%; */
-    margin: 0 auto;
-    padding: 20px 0px 0px 0px;
-  }
-
-  .search {
-    width: 55%;
+    display: flex;
     padding: 15px;
-    border-radius: 9px;
-    float: left;
-    margin-bottom: 25px;
   }
-
-  .info {
-    width: 65%;
+  
+  form .pet {
+    float: unset;
+    margin: 0 auto;
   }
-
-  .info h1 {
-    width: 100%;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+  
+  .loader {
+    font-size: 100px;
+    animation: spin 1s linear infinite;
   }
-
-  .info h2 {
-    width: 100%;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+  
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
   }
-}
-
-.artistcount {
-  color: #240219;
-}
+  
+  .mini.loading-pane {
+    height: 34px;
+  }
+  
+  .mini .loader {
+    font-size: 34px;
+  }
+  

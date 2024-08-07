@@ -3,14 +3,21 @@ import { faEdit, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { deleteSong } from "../Redux/songsSlice";
-import { setSongDetails } from "../Redux/songDetailsSlice";
+import { setFormData, toggleFormMode } from "../Redux/formSlice";
 import "./Song.css";
 
 const Song = ({ title, artist, album, genre, id }) => {
   const dispatch = useDispatch();
 
-  const handleEdit = () => {
-    // dispatch(setSongDetails({ title, artist, album, genre, id }));
+  const handleEdit = (title, artist, album, genre, id) => {
+    try {
+      const payload = { title, artist, album, genre, id };
+      console.log("setFormData payload:", payload);
+      dispatch(setFormData(payload));
+      dispatch(toggleFormMode(true));
+    } catch (error) {
+      console.log(error);
+    }
   };
   const handleDelete = (id) => {
     try {
@@ -37,14 +44,15 @@ const Song = ({ title, artist, album, genre, id }) => {
         </div>
       </Link>
       <div className="icons">
-        <Link to={`/editsong/${id}`} onClick={handleEdit}>
-          <button className="icon-btn edit-btn">
-            <FontAwesomeIcon icon={faEdit} className="icon-song" alt="Edit" />
-          </button>
-        </Link>
         <button
-          onClick={() => handleDelete(id)}
+          className="icon-btn edit-btn"
+          onClick={() => handleEdit(title, artist, album, genre, id)}
+        >
+          <FontAwesomeIcon icon={faEdit} className="icon-song" alt="Edit" />
+        </button>
+        <button
           className="icon-btn delete-btn"
+          onClick={() => handleDelete(id)}
         >
           <FontAwesomeIcon icon={faTrashAlt} className="icon-song" />
         </button>

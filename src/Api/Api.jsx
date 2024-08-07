@@ -31,7 +31,7 @@ export const addSongApi = async function (formData) {
 
 export const editSongApi = async function (song,id) {
   try {
-    const response = await api.put(`/editsong/${id}`,song);
+    const response = await api.put(`/${id}`,song);
     return response.data;
   }
   catch (error) {
@@ -39,9 +39,9 @@ export const editSongApi = async function (song,id) {
     throw error;
   }
 }
-export const deleteSongApi = async function (id,formData) {
+export const deleteSongApi = async function (id) {
   try {
-    const response = await api.delete(`/${id}`,formData);
+    const response = await api.delete(`/${id}`);
     return response.data;
   }
   catch (error) {

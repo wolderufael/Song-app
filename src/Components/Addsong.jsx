@@ -1,8 +1,7 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { addSong } from "../Redux/songsSlice";
-import Modal from "./Modal";
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { addSong, editSong } from "../Redux/songsSlice";
+import { toggleFormMode } from "../Redux/formSlice";
 
 const initialSongState = {
   title: "",
@@ -12,12 +11,25 @@ const initialSongState = {
 };
 
 const Addsong = () => {
+  const songToEdit = useSelector((state) => state.formData.formData);
+  const editMode = useSelector((state) => state.formData.editMode);
   const [song, setSong] = useState(initialSongState);
   const dispatch = useDispatch();
 
-  const [showModal, setShowModal] = useState(false);
-  const navigate = useNavigate();
-  const [message, setMessage] = useState("");
+  useEffect(() => {
+    console.log("songToEdit:", songToEdit); // Debugging line
+
+    if (editMode && songToEdit) {
+      setSong({
+        title: songToEdit.title || "",
+        artist: songToEdit.artist || "",
+        album: songToEdit.album || "",
+        genre: songToEdit.genre || "",
+      });
+    } else {
+      setSong(initialSongState);
+    }
+  }, [editMode, songToEdit]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -26,36 +38,18 @@ const Addsong = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(addSong(song));
+    if (editMode) {
+      dispatch(editSong({ song, id: songToEdit.id }));
+      dispatch(toggleFormMode(false));
+    } else {
+      dispatch(addSong(song));
+    }
     setSong(initialSongState);
   };
 
-  // async function addSongFunc() {
-  //   try {
-  //     const res = await addSongApi(formData);
-  //     if (res.message === "Song Added") {
-  //       setMessage("Song added successfully");
-  //     } else if (res.message === "Song Exists") {
-  //       setMessage("Song already exists");
-  //     } else {
-  //       setMessage("An unexpected error occurred");
-  //     }
-  //   } catch (error) {
-  //     setMessage("Failed to add song");
-  //   }
-  // }
   return (
-    <div className="song-params">
-      <form
-        onSubmit={
-          handleSubmit
-          // (e) => {
-          // e.preventDefault();
-          // addSongFunc();
-          // setShowModal(true);
-          // }
-        }
-      >
+    <>
+      <form onSubmit={handleSubmit}>
         <label htmlFor="title">
           <input
             name="title"
@@ -98,26 +92,7 @@ const Addsong = () => {
         </label>
         <button>Submit</button>
       </form>
-      {showModal ? (
-        <Modal>
-          <div>
-            <h1>{message}</h1>
-            <div className="buttons">
-              <button
-                onClick={() => {
-                  setShowModal(false);
-                  navigate("/");
-                }}
-              >
-                OK
-              </button>
-            </div>
-          </div>
-        </Modal>
-      ) : (
-        []
-      )}
-    </div>
+    </>
   );
 };
 

@@ -1,13 +1,72 @@
+import { useState } from "react";
 import Song from "./Song";
 
-const Results = ({ songs=[]}) => {
+const Results = ({ songs = [] }) => {
+  const [filterType, setFilterType] = useState("artist");
+  const [filterValue, setFilterValue] = useState("");
+
+  // const filteredSongs = songs.filter((song) => {
+  //   if (filterType === "artist") {
+  //     return song.artist.toLowerCase().startsWith(filterValue.toLowerCase());
+  //   } else if (filterType === "title") {
+  //     return song.title.toLowerCase().startsWith(filterValue.toLowerCase());
+  //   } else if (filterType === "album") {
+  //     return song.album.toLowerCase().startsWith(filterValue.toLowerCase());
+  //   } else if (filterType === "genre") {
+  //     return song.genre.toLowerCase().startsWith(filterValue.toLowerCase());
+  //   }
+  //   return true;
+  // });
+
+const filteredSongs = songs.filter((song) => {
+  if (filterType === "artist") {
+    return (
+      song.artist &&
+      song.artist.toLowerCase().startsWith(filterValue.toLowerCase())
+    );
+  } else if (filterType === "title") {
+    return (
+      song.title &&
+      song.title.toLowerCase().startsWith(filterValue.toLowerCase())
+    );
+  } else if (filterType === "album") {
+    return (
+      song.album &&
+      song.album.toLowerCase().startsWith(filterValue.toLowerCase())
+    );
+  } else if (filterType === "genre") {
+    return (
+      song.genre &&
+      song.genre.toLowerCase().startsWith(filterValue.toLowerCase())
+    );
+  }
+  return true;
+});
+
   return (
-    <div className="search-to-be">
+    <div className="search">
+      <div className="filters">
+        <select
+          value={filterType}
+          onChange={(e) => setFilterType(e.target.value)}
+        >
+          <option value="artist">Artist</option>
+          <option value="title">Title</option>
+          <option value="album">Album</option>
+          <option value="genre">Genre</option>
+        </select>
+        <input
+          type="text"
+          placeholder={`Filter by ${filterType}`}
+          value={filterValue}
+          onChange={(e) => setFilterValue(e.target.value)}
+        />
+      </div>
       <h1>List of All Songs</h1>
-      {!songs.length ? (
+      {!filteredSongs.length ? (
         <h1>No Songs Found!</h1>
       ) : (
-        songs.map((song) => {
+        filteredSongs.map((song) => {
           return (
             <Song
               title={song.title}
