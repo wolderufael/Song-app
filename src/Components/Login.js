@@ -1,8 +1,8 @@
-import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { loginUserApi, registerUserApi } from "../Api/Api";
-import { loginSuccess, registerSuccess } from "../Redux/authorizationSlice";
+import { useNavigate } from "react-router-dom";
+import { loginUserApi, registerUserApi } from "../Api/Api.js";
+import { loginSuccess } from "../Redux/authorizationSlice.js";
 
 const Login = () => {
   const [username, setUsername] = useState("");
@@ -33,7 +33,7 @@ const Login = () => {
 
   useEffect(() => {
     if (authError === null && token) {
-    navigate(`/${username}/Home`);
+      navigate(`/${username}/Home`);
     }
   }, [authError, token, navigate]);
 

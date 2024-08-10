@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Song from "./Song";
+import Song from "./Song.js";
 
 const Results = ({ songs = [] }) => {
   const [filterType, setFilterType] = useState("artist");
@@ -53,7 +53,7 @@ const Results = ({ songs = [] }) => {
       {!filteredSongs.length ? (
         <h1>No Songs Found!</h1>
       ) : (
-        filteredSongs.map((song,index) => {
+        filteredSongs.map((song, index) => {
           return (
             <Song
               title={song.title}

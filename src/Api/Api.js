@@ -7,15 +7,15 @@ const api = axios.create({
 function getPayloadFromToken(token) {
   if (!token) return null;
 
-  const base64Payload = token.split(".")[1]; 
-  const decodedPayload = atob(base64Payload); 
-  return JSON.parse(decodedPayload); 
+  const base64Payload = token.split(".")[1];
+  const decodedPayload = atob(base64Payload);
+  return JSON.parse(decodedPayload);
 }
 
 // Function to extract the username from the token
 function getUsernameFromToken(token) {
   const payload = getPayloadFromToken(token);
-  return payload ? payload.username : null; 
+  return payload ? payload.username : null;
 }
 
 const token = localStorage.getItem("token");

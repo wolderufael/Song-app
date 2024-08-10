@@ -1,10 +1,9 @@
-import React from "react";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Navbar from "./Navbar";
-import Results from "./Results";
-import { fetchSongs } from "../Redux/userSlice";
-import Addsong from "./Addsong";
+import { fetchSongs } from "../Redux/userSlice.js";
+import Addsong from "./Addsong.js";
+import Navbar from "./Navbar.js";
+import Results from "./Results.js";
 
 const Home = () => {
   const dispatch = useDispatch();

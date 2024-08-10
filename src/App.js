@@ -1,14 +1,13 @@
 import React from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Provider } from "react-redux";
-import Login from "./Components/Login";
-import Home from "./Components/Home";
-import Stats from "./Components/Stats";
-import About from "./Components/About";
-import Navbar from "./Components/Navbar";
-import Spotify from "./Components/Spotify";
-import store from "./Redux/store";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
+import About from "./Components/About.js";
+import Home from "./Components/Home.js";
+import Login from "./Components/Login.js";
+import Spotify from "./Components/Spotify.js";
+import Stats from "./Components/Stats.js";
+import store from "./Redux/store.js";
 
 const App = () => {
   return (

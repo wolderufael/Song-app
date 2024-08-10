@@ -1,19 +1,19 @@
 import { all, call, put, takeLatest } from "redux-saga/effects";
 import {
-  fetchSongs,
-  fetchSongsSuccess,
-  fetchSongsFailure,
   addSong,
-  editSong,
   deleteSong,
-} from "./userSlice";
+  editSong,
+  fetchSongs,
+  fetchSongsFailure,
+  fetchSongsSuccess,
+} from "./userSlice.js";
 
 import {
-  fetchSongsApi,
-  editSongApi,
   addSongApi,
   deleteSongApi,
-} from "../Api/Api";
+  editSongApi,
+  fetchSongsApi,
+} from "../Api/Api.js";
 
 export function* fetchSongsSaga() {
   try {
@@ -35,8 +35,8 @@ export function* addSongSaga(action) {
 }
 export function* editSongSaga(action) {
   try {
-    const {song,id}=action.payload
-    yield call(editSongApi, song,id);
+    const { song, id } = action.payload;
+    yield call(editSongApi, song, id);
     yield put(fetchSongs());
   } catch (error) {
     console.error("Add song failed", error);
