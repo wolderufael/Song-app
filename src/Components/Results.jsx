@@ -5,43 +5,30 @@ const Results = ({ songs = [] }) => {
   const [filterType, setFilterType] = useState("artist");
   const [filterValue, setFilterValue] = useState("");
 
-  // const filteredSongs = songs.filter((song) => {
-  //   if (filterType === "artist") {
-  //     return song.artist.toLowerCase().startsWith(filterValue.toLowerCase());
-  //   } else if (filterType === "title") {
-  //     return song.title.toLowerCase().startsWith(filterValue.toLowerCase());
-  //   } else if (filterType === "album") {
-  //     return song.album.toLowerCase().startsWith(filterValue.toLowerCase());
-  //   } else if (filterType === "genre") {
-  //     return song.genre.toLowerCase().startsWith(filterValue.toLowerCase());
-  //   }
-  //   return true;
-  // });
-
-const filteredSongs = songs.filter((song) => {
-  if (filterType === "artist") {
-    return (
-      song.artist &&
-      song.artist.toLowerCase().startsWith(filterValue.toLowerCase())
-    );
-  } else if (filterType === "title") {
-    return (
-      song.title &&
-      song.title.toLowerCase().startsWith(filterValue.toLowerCase())
-    );
-  } else if (filterType === "album") {
-    return (
-      song.album &&
-      song.album.toLowerCase().startsWith(filterValue.toLowerCase())
-    );
-  } else if (filterType === "genre") {
-    return (
-      song.genre &&
-      song.genre.toLowerCase().startsWith(filterValue.toLowerCase())
-    );
-  }
-  return true;
-});
+  const filteredSongs = songs.filter((song) => {
+    if (filterType === "artist") {
+      return (
+        song.artist &&
+        song.artist.toLowerCase().startsWith(filterValue.toLowerCase())
+      );
+    } else if (filterType === "title") {
+      return (
+        song.title &&
+        song.title.toLowerCase().startsWith(filterValue.toLowerCase())
+      );
+    } else if (filterType === "album") {
+      return (
+        song.album &&
+        song.album.toLowerCase().startsWith(filterValue.toLowerCase())
+      );
+    } else if (filterType === "genre") {
+      return (
+        song.genre &&
+        song.genre.toLowerCase().startsWith(filterValue.toLowerCase())
+      );
+    }
+    return true;
+  });
 
   return (
     <div className="search">
@@ -66,7 +53,7 @@ const filteredSongs = songs.filter((song) => {
       {!filteredSongs.length ? (
         <h1>No Songs Found!</h1>
       ) : (
-        filteredSongs.map((song) => {
+        filteredSongs.map((song,index) => {
           return (
             <Song
               title={song.title}
@@ -74,7 +61,7 @@ const filteredSongs = songs.filter((song) => {
               album={song.album}
               genre={song.genre}
               id={song._id}
-              key={song._id}
+              key={`${song._id}-${index}`}
             />
           );
         })

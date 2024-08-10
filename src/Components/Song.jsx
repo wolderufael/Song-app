@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { deleteSong } from "../Redux/songsSlice";
+import { deleteSong } from "../Redux/userSlice";
 import { setFormData, toggleFormMode } from "../Redux/formSlice";
 import "./Song.css";
 

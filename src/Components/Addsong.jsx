@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addSong, editSong } from "../Redux/songsSlice";
+import { addSong,editSong } from "../Redux/userSlice";
 import { toggleFormMode } from "../Redux/formSlice";
 
 const initialSongState = {
@@ -17,8 +17,6 @@ const Addsong = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log("songToEdit:", songToEdit); // Debugging line
-
     if (editMode && songToEdit) {
       setSong({
         title: songToEdit.title || "",

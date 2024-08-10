@@ -1,13 +1,14 @@
 import React from "react";
-import {useEffect } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import Navbar from "./Navbar";
 import Results from "./Results";
-import { fetchSongs } from "../Redux/songsSlice";
+import { fetchSongs } from "../Redux/userSlice";
 import Addsong from "./Addsong";
 
 const Home = () => {
   const dispatch = useDispatch();
-  const songs = useSelector((state) => state.songs.songs);
+  const songs = useSelector((state) => state.user.user.songs);
 
   useEffect(() => {
     dispatch(fetchSongs());
@@ -15,12 +16,13 @@ const Home = () => {
   }, [dispatch]);
 
   return (
-    <div className="search-params">
-      <Addsong />
-      {/* <div className="list-to-be"> */}
-      <Results songs={songs} />
-      {/* </div> */}
-    </div>
+    <>
+      <Navbar />
+      <div className="search-params">
+        <Addsong />
+        <Results songs={songs} />
+      </div>
+    </>
   );
 };
 

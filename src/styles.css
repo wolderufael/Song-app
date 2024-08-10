@@ -20,7 +20,8 @@
 
 /******************/
 
-.search-params form {
+/* .search-params */
+ form {
   border-radius: 6px;
   background: #333;
   box-shadow: 0px 0px 12px #aaa, -0px -0px 12px #fff;
@@ -39,12 +40,13 @@
   margin-bottom: 25px;
 }
 
-.search-params label {
+.search-params label,form label {
   display: block;
   width: 100%;
 }
 
-.search-params form input {
+/* .search-params */
+ form input {
   margin-bottom: 30px;
   font-size: 18px;
   height: 30px;

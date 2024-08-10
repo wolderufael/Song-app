@@ -3,10 +3,11 @@ import {
   fetchSongs,
   fetchSongsSuccess,
   fetchSongsFailure,
-  editSong,
   addSong,
+  editSong,
   deleteSong,
-} from "./songsSlice";
+} from "./userSlice";
+
 import {
   fetchSongsApi,
   editSongApi,
@@ -17,7 +18,8 @@ import {
 export function* fetchSongsSaga() {
   try {
     const response = yield call(fetchSongsApi);
-    yield put(fetchSongsSuccess(response.songs));
+    console.log(response);
+    yield put(fetchSongsSuccess(response));
   } catch (error) {
     yield put(fetchSongsFailure());
   }
