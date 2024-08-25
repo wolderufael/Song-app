@@ -1,0 +1,75 @@
+/* General Styles */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
+}
+
+/* Navbar Styles */
+.navbar {
+  background-color: #333;
+  color: white;
+  padding: 10px 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.nav {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.nav-link {
+  color: white;
+  text-decoration: none;
+  font-size: 18px;
+  margin: 5px 10px;
+  transition: color 0.3s;
+  display: flex;
+  align-items: center;
+}
+
+.nav-link .icon {
+  margin-right: 8px;
+}
+
+.nav-link:hover {
+  color: #007bff;
+}
+
+.nav-link.active {
+  color: #007bff;
+}
+
+.last-item {
+  background-color:#ad343e;
+  padding: 8px 16px;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+.last-item:hover {
+  background-color: #0056b3;
+}
+
+.last-item .icon {
+  margin-right: 5px;
+}
+
+/* Responsive Styles */
+@media (max-width: 600px) {
+  .nav {
+    flex-direction: column;
+  }
+
+  .nav-link {
+    font-size: 16px;
+    margin: 10px 0;
+  }
+
+  .last-item {
+    padding: 10px 20px;
+  }
+}
